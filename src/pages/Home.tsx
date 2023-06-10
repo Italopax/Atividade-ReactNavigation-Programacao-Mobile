@@ -7,9 +7,15 @@ export default function Home ({navigation}) {
 
   const [cardInfo, setCardInfo] = useState<any>();
 
+  // useEffect(() => {
+  //   console.log(cardInfo);
+  // }, [cardInfo]);
+
   async function searchRandomCard () {
+    // console.log('cardInfo');
     try{
       const res = await fetch('https://db.ygoprodeck.com/api/v7/randomcard.php');
+      console.log(res);
       const json = await res.json();
       setCardInfo(json);
     } catch (err) {
@@ -27,15 +33,12 @@ export default function Home ({navigation}) {
           </Text>
         </TouchableOpacity>
       </View>
-      <View className="flex gap-5">
+      <View className="flex gap-5 w-72">
         <View>
           {cardInfo?.card_images[0]?.image_url && (
-            <>
-            <Text>ad w dla çl</Text>
-            <Image className="h-72" source={{
+            <Image className="h-96" source={{
               uri: cardInfo.card_images[0].image_url,
             }} />
-            </>
           )}
         </View>
         <TouchableOpacity className="bg-gray-300 rounded py-2 px-4 justify-center items-center" onPress={searchRandomCard}>
